@@ -1,6 +1,6 @@
 package com.javalab.movieapp.dao;
 
-import com.javalab.movieapp.entity.BaseEntity;
+import com.javalab.movieapp.entities.BaseEntity;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface AbstractDAO<K, T extends BaseEntity> {
+
     List<T> findAll(long languageId) throws SQLException, IOException;
 
     T findEntityById(K id, long languageId) throws SQLException, IOException;

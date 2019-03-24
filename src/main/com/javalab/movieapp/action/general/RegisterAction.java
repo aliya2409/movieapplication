@@ -3,9 +3,9 @@ package com.javalab.movieapp.action.general;
 import com.javalab.movieapp.action.Action;
 import com.javalab.movieapp.action.ActionResult;
 import com.javalab.movieapp.dao.UserDAO;
-import com.javalab.movieapp.entity.User;
-import com.javalab.movieapp.security.PasswordEncryptor;
-import com.javalab.movieapp.validator.InputValidationException;
+import com.javalab.movieapp.entities.User;
+import com.javalab.movieapp.utils.security.PasswordEncryptor;
+import com.javalab.movieapp.utils.validators.InputValidationException;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,8 +15,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import static com.javalab.movieapp.Constants.*;
-import static com.javalab.movieapp.validator.InputValidator.*;
-import static com.javalab.movieapp.validator.UserValidator.isntEmptyUser;
+import static com.javalab.movieapp.utils.validators.InputValidator.*;
+import static com.javalab.movieapp.utils.validators.UserValidator.isntEmptyUser;
 
 public class RegisterAction implements Action {
 
@@ -32,7 +32,7 @@ public class RegisterAction implements Action {
             LocalDate localDate = LocalDate.parse(validateNullOrEmpty(req.getParameter(BIRTHDATE_PARAM)), formatter);
             user.setBirthDate(localDate);
             user.setEmail(validateEmail(req.getParameter(EMAIL_PARAM)));
-            user.setRoleId(User.USER_ROLE);
+            user.setRoleId(USER_ROLE_ID);
             UserDAO userDAO = new UserDAO();
             User foundByEmail = userDAO.findUserByEmail(user.getEmail());
             if (isntEmptyUser(foundByEmail)) {

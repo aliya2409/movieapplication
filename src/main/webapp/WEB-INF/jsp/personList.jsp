@@ -25,6 +25,16 @@
 </head>
 <body>
 <c:choose>
+    <c:when test="${not empty sessionScope.user and user.roleId eq Constants.ADMIN_ROLE_ID and requestScope.origin eq Constants.LIST_PERSON_ACTION}">
+        <c:remove var="jspName" scope="request"/>
+        <c:set var="jspName" value="/listPerson" scope="request"/>
+    </c:when>
+    <c:when test="${requestScope.origin ne Constants.LIST_PERSON_ACTION}">
+        <c:remove var="jspName" scope="request"/>
+        <c:set var="jspName" value="/movieCrewInfo?movieId=${requestScope.movieId}" scope="request"/>
+    </c:when>
+</c:choose>
+<c:choose>
     <c:when test="${not empty sessionScope.user and user.roleId eq Constants.ADMIN_ROLE_ID}">
         <jsp:include page="adminNavBar.jsp"/>
     </c:when>
@@ -153,7 +163,7 @@
                             <c:when test="${person.roleId eq Constants.PERSON_ROLE_WRITER}"><fmt:message key="writer"/></c:when>
                         </c:choose>
                     </c:if></p>
-                    <p class="card-text"><strong><fmt:message key="birthDate"/>:</strong> ${person.birthDate} </p>
+                    <p class="card-text"><strong><fmt:message key="birthDate"/>:</strong> ${person.formattedBirthDate} </p>
                     <c:if test="${not empty sessionScope.user and user.roleId eq Constants.ADMIN_ROLE_ID and requestScope.origin eq Constants.LIST_PERSON_ACTION}">
                         <a href="${movieServlet}/deletePerson?personId=${person.id}"
                            class="btn btn-danger" roleId="button"><fmt:message
@@ -169,7 +179,7 @@
                             <div class="card card-block">
                                 <form class="form-group" action="${movieServlet}/updatePerson" method="POST"
                                       enctype="multipart/form-data">
-                                    <input type="hidden" name="userId" value="${person.id}">
+                                    <input type="hidden" name="personId" value="${person.id}">
                                     <table>
                                         <tr>
                                             <td>

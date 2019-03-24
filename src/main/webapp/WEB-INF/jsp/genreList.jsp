@@ -27,6 +27,8 @@
     </script>
 </head>
 <body>
+<c:remove var="jspName" scope="request"/>
+<c:set var="jspName" value="/listGenre" scope="request"/>
 <jsp:include page="adminNavBar.jsp"/>
 <div class="row">
     <div class="col"></div>
@@ -44,14 +46,8 @@
                     <label for="nameAdd"><fmt:message key="name"/></label>
                     <input type="text" id="nameAdd" name="name" value="" required>
                 </div>
-                <div class="form-group">
-                    <label for="en"><fmt:message key="en"/></label>
-                    <input id="en" name="languageId" type="radio" value="1">
-                    <br>
-                    <label for="ru"><fmt:message key="ru"/></label>
-                    <input id="ru" name="languageId" type="radio" value="2">
-                </div>
-                <input type="submit" value="<fmt:message key="add"/>">
+                <button type="submit" class="btn btn-primary"><fmt:message
+                        key="submit"/></button>
             </form>
         </div>
         <div>
@@ -110,11 +106,12 @@
                                             <label for="nameLocale"><fmt:message key="name"/></label>
                                             <input class="form-control" type="text" id="nameLocale" name="name"
                                                    value="" required>
-                                                <label for="en1"><fmt:message key="en"/></label>
-                                                <input id="en1" name="languageId" type="radio" value="1">
-                                                <br>
-                                                <label for="ru1"><fmt:message key="ru"/></label>
-                                                <input id="ru1" name="languageId" type="radio" value="2">
+                                        <c:forEach items="${requestScope.languages}" var="language">
+                                            <c:if test="${language.id ne sessionScope.languageId}">
+                                                <label for="lang${language.id}"><fmt:message key="${language.name}"/></label>
+                                                <input id="lang${language.id}" name="languageId" type="radio" value="${language.id}">
+                                            </c:if>
+                                        </c:forEach>
                                         <button type="submit" class="btn btn-primary"><fmt:message
                                                 key="submit"/></button>
                                     </form>

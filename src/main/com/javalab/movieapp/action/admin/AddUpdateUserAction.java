@@ -3,9 +3,9 @@ package com.javalab.movieapp.action.admin;
 import com.javalab.movieapp.action.Action;
 import com.javalab.movieapp.action.ActionResult;
 import com.javalab.movieapp.dao.UserDAO;
-import com.javalab.movieapp.entity.User;
-import com.javalab.movieapp.security.PasswordEncryptor;
-import com.javalab.movieapp.validator.InputValidationException;
+import com.javalab.movieapp.entities.User;
+import com.javalab.movieapp.utils.security.PasswordEncryptor;
+import com.javalab.movieapp.utils.validators.InputValidationException;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,10 +14,11 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 
 import static com.javalab.movieapp.Constants.*;
-import static com.javalab.movieapp.validator.InputValidator.*;
-import static com.javalab.movieapp.validator.UserValidator.isntEmptyUser;
+import static com.javalab.movieapp.utils.validators.InputValidator.*;
+import static com.javalab.movieapp.utils.validators.UserValidator.isntEmptyUser;
 
 public class AddUpdateUserAction implements Action {
+
     private static final Logger LOGGER = Logger.getLogger(AddUpdateUserAction.class);
 
 

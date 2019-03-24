@@ -3,8 +3,8 @@ package com.javalab.movieapp.action.admin;
 import com.javalab.movieapp.action.Action;
 import com.javalab.movieapp.action.ActionResult;
 import com.javalab.movieapp.dao.PersonDAO;
-import com.javalab.movieapp.entity.Person;
-import com.javalab.movieapp.validator.InputValidationException;
+import com.javalab.movieapp.entities.Person;
+import com.javalab.movieapp.utils.validators.InputValidationException;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,9 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 
 import static com.javalab.movieapp.Constants.*;
-import static com.javalab.movieapp.validator.InputValidator.*;
+import static com.javalab.movieapp.utils.validators.InputValidator.*;
 
 public class AddCrewMemberAction implements Action {
+
     private static final Logger LOGGER = Logger.getLogger(AddCrewMemberAction.class);
 
 

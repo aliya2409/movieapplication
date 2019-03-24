@@ -11,6 +11,7 @@ import static com.javalab.movieapp.Constants.HOME_PAGE;
 import static com.javalab.movieapp.Constants.USER_ATTRIB;
 
 public class LogOutAction implements Action {
+
     private static final Logger LOGGER = Logger.getLogger(LogOutAction.class);
 
 
@@ -18,7 +19,7 @@ public class LogOutAction implements Action {
     public ActionResult execute(HttpServletRequest req, HttpServletResponse res) {
         req.getSession().setAttribute(USER_ATTRIB, null);
         LOGGER.debug("Log out successful");
-        ActionResult actionResult = new ActionResult(HOME_PAGE, false);
+        ActionResult actionResult = new ActionResult(HOME_PAGE, true);
         return actionResult;
     }
 }

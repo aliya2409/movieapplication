@@ -3,8 +3,8 @@ package com.javalab.movieapp.action.admin;
 import com.javalab.movieapp.action.Action;
 import com.javalab.movieapp.action.ActionResult;
 import com.javalab.movieapp.dao.GenreDAO;
-import com.javalab.movieapp.entity.Genre;
-import com.javalab.movieapp.validator.InputValidationException;
+import com.javalab.movieapp.entities.Genre;
+import com.javalab.movieapp.utils.validators.InputValidationException;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,10 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 
 import static com.javalab.movieapp.Constants.*;
-import static com.javalab.movieapp.validator.InputValidator.validateLong;
-import static com.javalab.movieapp.validator.InputValidator.validateName;
+import static com.javalab.movieapp.utils.validators.InputValidator.validateCrucialParamID;
+import static com.javalab.movieapp.utils.validators.InputValidator.validateLong;
+import static com.javalab.movieapp.utils.validators.InputValidator.validateName;
 
 public class AddUpdateGenreAction implements Action {
+
     private static final Logger LOGGER = Logger.getLogger(AddUpdateGenreAction.class);
 
 
@@ -23,7 +25,7 @@ public class AddUpdateGenreAction implements Action {
     public ActionResult execute(HttpServletRequest req, HttpServletResponse res) {
         String action = req.getPathInfo();
         try {
-            Long languageId = Long.valueOf(validateLong(req.getParameter(LANGUAGE_ID_PARAM)));
+            Long languageId = (Long) req.getSession().getAttribute(LANGUAGE_ID_ATTRIB);
             String genreName = validateName(req.getParameter(NAME_PARAM));
             Genre genre = new Genre();
             genre.setName(genreName);

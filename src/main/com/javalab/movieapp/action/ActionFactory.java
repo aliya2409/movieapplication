@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ActionFactory {
+
     static Map<String, Action> actions = new HashMap<>();
 
     {

@@ -3,7 +3,7 @@ package com.javalab.movieapp.action.admin;
 import com.javalab.movieapp.action.Action;
 import com.javalab.movieapp.action.ActionResult;
 import com.javalab.movieapp.dao.UserDAO;
-import com.javalab.movieapp.entity.User;
+import com.javalab.movieapp.entities.User;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -16,6 +16,7 @@ import java.util.List;
 import static com.javalab.movieapp.Constants.*;
 
 public class ListUserAction implements Action {
+
     private static final Logger LOGGER = Logger.getLogger(ListUserAction.class);
 
     @Override

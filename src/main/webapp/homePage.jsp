@@ -45,6 +45,8 @@
     </script>
 </head>
 <body style="text-align: center">
+<c:remove var="jspName" scope="request"/>
+<c:set var="jspName" value="/homePage.jsp" scope="request"/>
 <c:choose>
     <c:when test="${not empty user and user.roleId eq 2}">
         <jsp:include page="WEB-INF/jsp/adminNavBar.jsp"/>

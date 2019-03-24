@@ -1,19 +1,22 @@
 package com.javalab.movieapp.dao;
 
-import com.javalab.movieapp.entity.Language;
+import com.javalab.movieapp.entities.Language;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class LanguageDAO implements AbstractDAO<Long, Language> {
+
+    public static final String LANGUAGE_ID_COLUMN = "language_id";
+    public static final String LANGUAGE_NAME_COLUMN = "language_name";
+
     public static final String FIND_ALL_LANGUAGES_SQL_QUERY = "SELECT * FROM language;";
     public static final String FIND_LANGUAGE_BY_ID_SQL_QUERY = "SELECT * FROM language WHERE language_id = ?;";
     public static final String DELETE_LANGUAGE_BY_ID_SQL_QUERY = "DELETE FROM language WHERE language_id = ?;";
     public static final String ADD_LANGUAGE_SQL_QUERY = "INSERT INTO language(language_name) VALUES (?);";
     public static final String UPDATE_LANGUAGE_SQL_QUERY = "UPDATE language SET language_name = ? WHERE language_id = ?;";
-    public static final String LANGUAGE_ID_COLUMN = "language_id";
-    public static final String LANGUAGE_NAME_COLUMN = "language_name";
+
     private final ConnectionPool CONNECTION_POOL = ConnectionPool.getInstance();
 
     public List<Language> findAll() throws SQLException {

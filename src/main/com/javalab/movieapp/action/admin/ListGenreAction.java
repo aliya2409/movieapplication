@@ -3,7 +3,9 @@ package com.javalab.movieapp.action.admin;
 import com.javalab.movieapp.action.Action;
 import com.javalab.movieapp.action.ActionResult;
 import com.javalab.movieapp.dao.GenreDAO;
-import com.javalab.movieapp.entity.Genre;
+import com.javalab.movieapp.dao.LanguageDAO;
+import com.javalab.movieapp.entities.Genre;
+import com.javalab.movieapp.entities.Language;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +16,7 @@ import java.util.List;
 import static com.javalab.movieapp.Constants.*;
 
 public class ListGenreAction implements Action {
+
     private static final Logger LOGGER = Logger.getLogger(ListGenreAction.class);
 
 
@@ -25,6 +28,9 @@ public class ListGenreAction implements Action {
             GenreDAO genreDAO = new GenreDAO();
             List<Genre> genres = genreDAO.findAll(languageId);
             req.setAttribute(GENRE_LIST_ATTRIB, genres);
+            LanguageDAO languageDAO = new LanguageDAO();
+            List<Language> availableLanguages = languageDAO.findAll();
+            req.setAttribute(LANGUAGE_LIST_ATTRIB, availableLanguages);
         } catch (SQLException e) {
             LOGGER.error(e);
             req.setAttribute(ERROR_ATTRIB, DATABASE_ERROR);

@@ -27,6 +27,8 @@
     </script>
 </head>
 <body>
+<c:remove var="jspName" scope="request"/>
+<c:set var="jspName" value="/listLanguage" scope="request"/>
 <jsp:include page="adminNavBar.jsp"/>
 <div class="row">
     <div class="col"></div>
@@ -59,11 +61,6 @@
                 <tr>
                     <td>${language.name}</td>
                     <td>
-                        <a href="${movieServlet}/deleteLanguage?languageId=${language.id}" class="btn btn-danger"
-                           roleId="button"><fmt:message
-                                key="delete"/></a>
-                    </td>
-                    <td>
                         <p>
                             <button class="btn btn-primary" type="button" data-toggle="collapse"
                                     data-target="#buttoncollapse${language.id}"
@@ -83,9 +80,15 @@
                             </div>
                         </div>
                     </td>
+                    <td>
+                        <a href="${movieServlet}/deleteLanguage?languageId=${language.id}" class="btn btn-danger"
+                           roleId="button"><fmt:message
+                                key="delete"/></a>
+                    </td>
                 </tr>
             </c:forEach>
             <tr>
+                <td></td>
                 <td>
                     <p>
                         <button class="btn btn-primary" type="button" data-toggle="collapse"
@@ -146,6 +149,9 @@
                         </form>
                     </div>
                 </td>
+            </tr>
+            <tr>
+                <td></td>
                 <td>
                     <p>
                         <button class="btn btn-primary" type="button" data-toggle="collapse"
@@ -164,8 +170,7 @@
                             <br>
                             <c:forEach items="${requestScope.languages}" var="language">
                                 <label for="${language.name}">${language.name}</label>
-                                <input class="form-control" id="${language.name}" name="languageId" type="radio"
-                                       value="${language.id}">
+                                <input id="${language.name}" name="languageId" type="radio" value="${language.id}">
                             </c:forEach>
                             <br>
                             <label for="translatedName"><fmt:message key="translatedName"/></label>

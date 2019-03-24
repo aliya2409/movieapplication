@@ -4,9 +4,9 @@ import com.javalab.movieapp.action.Action;
 import com.javalab.movieapp.action.ActionResult;
 import com.javalab.movieapp.dao.GenreDAO;
 import com.javalab.movieapp.dao.MovieDAO;
-import com.javalab.movieapp.entity.Genre;
-import com.javalab.movieapp.entity.Movie;
-import com.javalab.movieapp.validator.InputValidationException;
+import com.javalab.movieapp.entities.Genre;
+import com.javalab.movieapp.entities.Movie;
+import com.javalab.movieapp.utils.validators.InputValidationException;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,9 +16,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 import static com.javalab.movieapp.Constants.*;
-import static com.javalab.movieapp.validator.InputValidator.validateTitle;
+import static com.javalab.movieapp.utils.validators.InputValidator.validateTitle;
 
 public class SearchMovieAction implements Action {
+
     private static final Logger LOGGER = Logger.getLogger(SearchMovieAction.class);
 
 

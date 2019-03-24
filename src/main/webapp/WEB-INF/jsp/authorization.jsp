@@ -9,6 +9,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <fmt:setLocale value="${locale}"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -42,6 +43,8 @@
     </script>
 </head>
 <body>
+<c:remove var="jspName" scope="request"/>
+<c:set var="jspName" value="/authorize" scope="request"/>
 <jsp:include page="${movieapp}/WEB-INF/jsp/clientNavBar.jsp"/>
 <div class="row">
 <div class="col"></div>
@@ -135,6 +138,7 @@
     </div>
 </c:when>
 </c:choose>
+    <div class="container" style="text-align: center;"><img src="/resources/authorize.jpg" style="max-width: 100%; max-height: 100%;"></div>
 </div>
 <div class="col"></div>
 </div>

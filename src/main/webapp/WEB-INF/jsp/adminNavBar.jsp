@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <fmt:setLocale value="${locale}"/>
 <fmt:setBundle basename="locale"/>
 <meta charset="utf-8">
@@ -42,8 +43,8 @@
                     <fmt:message key="changeLocale"/>
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="${movieServlet}/changeLocale?languageId=1&location=${requestScope['javax.servlet.forward.request_uri']}">English</a>
-                    <a class="dropdown-item" href="${movieServlet}/changeLocale?languageId=2&location=${requestScope['javax.servlet.forward.request_uri']}">Русский</a>
+                    <a class="dropdown-item" href="${movieServlet}/changeLocale?languageId=1&location=${jspName}">English</a>
+                    <a class="dropdown-item" href="${movieServlet}/changeLocale?languageId=2&location=${jspName}">Русский</a>
                 </div>
             </li>
             <li>

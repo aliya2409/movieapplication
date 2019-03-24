@@ -1,6 +1,7 @@
 package com.javalab.movieapp.action;
 
 public class ActionResult {
+
     String path;
     boolean isRedirect;
 

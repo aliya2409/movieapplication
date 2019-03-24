@@ -1,26 +1,25 @@
 package com.javalab.movieapp.dao;
 
+import com.javalab.movieapp.action.user.UpdateUserInfoAction;
+import org.apache.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.TimeZone;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
 import static java.util.ResourceBundle.getBundle;
 
 public class ConnectionPool {
+
     public static final int DEFAULT_POOL_SIZE = 10;
+    public static final String SERVER_TIME_ZONE = "GMT+0:00";
     private static ConnectionPool instance;
     private BlockingQueue<Connection> connectionQueue;
-
-
-    public static void dispose() throws SQLException {
-        if (instance != null) {
-            instance.clearConnectionQueue();
-            instance = null;
-        }
-    }
+    private static final Logger LOGGER = Logger.getLogger(UpdateUserInfoAction.class);
 
     public static ConnectionPool getInstance() {
         if (instance == null) {
@@ -36,7 +35,7 @@ public class ConnectionPool {
                 instance = new ConnectionPool(driver, url,
                         user, password, poolSize);
             } catch (ClassNotFoundException e) {
-                //"Driver " + driver + " not found"
+               LOGGER.error(e);
                 throw new RuntimeException(e);
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -48,12 +47,12 @@ public class ConnectionPool {
     private ConnectionPool(String driver, String url,
                            String user, String password, int poolSize)
             throws ClassNotFoundException, SQLException {
+        TimeZone timeZone = TimeZone.getTimeZone(SERVER_TIME_ZONE);
+        TimeZone.setDefault(timeZone);
         Class.forName(driver);
-        connectionQueue
-                = new ArrayBlockingQueue<>(poolSize);
+        connectionQueue = new ArrayBlockingQueue<>(poolSize);
         for (int i = 0; i < poolSize; i++) {
-            Connection connection
-                    = DriverManager.getConnection(url, user, password);
+            Connection connection = DriverManager.getConnection(url, user, password);
             connectionQueue.offer(connection);
         }
     }
@@ -63,8 +62,7 @@ public class ConnectionPool {
         try {
             connection = connectionQueue.take();
         } catch (InterruptedException e) {
-            //"Free connection waiting interrupted.
-// Returned `null` connection", e
+
         }
         return connection;
     }
@@ -73,25 +71,13 @@ public class ConnectionPool {
         try {
             if (!connection.isClosed()) {
                 if (!connectionQueue.offer(connection)) {
-                    System.out.println("Connection not added. Possible `leakage` of connections");
+                    LOGGER.info("Connection not added. Possible `leakage` of connections");
                 }
             } else {
-                System.out.println("Trying to release closed connection. Possible `leakage` of connections");
+                LOGGER.info("Trying to release closed connection. Possible `leakage` of connections");
             }
         } catch (SQLException e) {
-            System.out.println("SQLException at connection isClosed () checking.\n" +
-                    "// Connection not added");
-        }
-    }
-
-    private void clearConnectionQueue() throws SQLException {
-        Connection connection;
-        while ((connection = connectionQueue.poll()) != null) {
-            /* see java.sql.Connection#close () javadoc */
-            if (!connection.getAutoCommit()) {
-                connection.commit();
-            }
-            connection.close();
+            LOGGER.error( "Connection not added");
         }
     }
 }

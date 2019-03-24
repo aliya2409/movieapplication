@@ -2,10 +2,11 @@ package com.javalab.movieapp;
 
 public class Constants {
     public static final Integer USER_ROLE_ID = 1;
-    public static final String ADMIN_ROLE_ID = "2";
+    public static final Integer ADMIN_ROLE_ID = 2;
     public static final Long DEFAULT_LANGUAGE_ID = 2L;
+    public static final String LOCALIZATION_BUNDLE = "locale";
+    public static final String DATE_FORMAT_KEY = "dateFormat";
     public static final String LOGIN_PARAM = "login";
-    public static final String MOVIEAPP_SERVLET_MAPPING = "/movieapp";
     public static final String PASSWORD_PARAM = "pass";
     public static final String BIRTHDATE_PARAM = "birthD";
     public static final String IMAGE_PARAM = "image";

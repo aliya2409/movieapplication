@@ -1,6 +1,6 @@
 package com.javalab.movieapp.dao;
 
-import com.javalab.movieapp.entity.Genre;
+import com.javalab.movieapp.entities.Genre;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,17 +10,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GenreDAO implements AbstractDAO<Long, Genre> {
+
     public static final String GENRE_ID_COLUMN = "genre_id";
     public static final String GENRE_NAME_COLUMN = "genre_name";
+
     public static final String FIND_ALL_GENRES_SQL_QUERY = "SELECT genre_id, genre_name FROM genre WHERE language_id = ?;";
     public static final String FIND_GENRE_BY_ID_SQL_QUERY = "SELECT genre_id, genre_name FROM genre WHERE language_id = ? AND genre_id = ?;";
     public static final String DELETE_GENRE_BY_ID_SQL_QUERY = "DELETE FROM genre WHERE genre_id = ?;";
     public static final String ADD_GENRE_SQL_QUERY = "INSERT INTO genre(genre_name, language_id) VALUES (?, ?);";
     public static final String UPDATE_GENRE_SQL_QUERY = "UPDATE genre SET genre_name = ? WHERE genre_id = ? AND language_id = ?;";
     public static final String FIND_MOVIE_GENRES_SQL_QUERY = "SELECT g.genre_id, g.genre_name FROM genre g JOIN movie_genre USING (genre_id) WHERE movie_id = ? AND language_id = ?;";
-    public static final String ADD_GENRE_TO_MOVIE_SQL_QUERY = "INSERT INTO genre_movie (movie_id, genre_id) VALUES (?, (SELECT genre_id FROM genres WHERE genre_name = ?));";
+    public static final String ADD_GENRE_TO_MOVIE_SQL_QUERY = "INSERT INTO movie_genre (movie_id, genre_id) VALUES (?, (SELECT genre_id FROM genre WHERE genre_name = ?));";
     public static final String DELETE_MOVIE_GENRE_SQL_QUERY = "DELETE FROM movie_genre WHERE genre_id = ? AND movie_id = ?;";
     public static final String ADD_GENRE_LOCALE_SQL_QUERY = "INSERT INTO genre(genre_id, language_id, genre_name) VALUES (?, ?, ?);";
+
     private final ConnectionPool CONNECTION_POOL = ConnectionPool.getInstance();
 
     public List<Genre> findMovieGenres(long movieId, long languageId) throws SQLException {

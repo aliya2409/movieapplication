@@ -11,28 +11,27 @@
 <html>
 <fmt:setLocale value="${locale}"/>
 <fmt:setBundle basename="locale"/>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://epicblog.net/download/datepicker.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script>
+    $(function () {
+        $(".datepicker").datepicker({dateFormat: 'yy-mm-dd'});
+    });
+</script>
+<script>var check = function () {
+    if (document.getElementsByClassName('newPass').value ==
+        document.getElementsByClassName('confirmPass').value) {
+        document.getElementsByClassName('message').innerHTML = '\u{1F44D}';
+    } else {
+        document.getElementsByClassName('message').innerHTML = '\u{1F44E}';
+    }
+}</script>
 <head>
     <title><fmt:message key="users"/></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://epicblog.net/download/datepicker.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script>var check = function () {
-        if (document.getElementById('newPass').value ==
-            document.getElementById('confirmPass').value) {
-            document.getElementsByClassName('message').innerHTML = '\u{1F44D}';
-        } else {
-            document.getElementsByClassName('message').innerHTML = '\u{1F44E}';
-        }
-    }</script>
-    <script>
-        $(function () {
-            $(".datepicker").datepicker({dateFormat: 'yy-mm-dd'});
-        });
-    </script>
     <script type="text/javascript">
         $(document).ready(function () {
             var error = '${error}';
@@ -43,6 +42,8 @@
     </script>
 </head>
 <body>
+<c:remove var="jspName" scope="request"/>
+<c:set var="jspName" value="/listUser" scope="request"/>
 <jsp:include page="adminNavBar.jsp"/>
 <p>
     <button class="btn btn-primary btn-lg btn-block" type="button" data-toggle="collapse"
@@ -80,7 +81,7 @@
                         <fmt:message key="newPassword"/>
                     </td>
                     <td>
-                        <input name="pass" type="password" class="form-control" onkeyup='check();' required/>
+                        <input name="pass" class="form-control newPass" id="newPass" type="password" onkeyup='check();' required/>
                     </td>
                 </tr>
                 <tr>
@@ -88,8 +89,10 @@
                         <fmt:message key="confirmPassword"/>
                     </td>
                     <td>
-                        <input type="password" class="form-control" name="confirmPass" onkeyup='check();'
-                               required/><span class='message'></span>
+                        <input type="password" class="form-control confirmPass" name="confirmPass" id="confirmPass" onkeyup='check();' required/>
+                    </td>
+                    <td>
+                        <span id='message'></span>
                     </td>
                 </tr>
                 <tr>
@@ -186,7 +189,7 @@
                                                 <fmt:message key="newPassword"/>
                                             </td>
                                             <td>
-                                                <input name="pass" type="password" onkeyup='check();' required/>
+                                                <input name="pass" class="form-control newPass" type="password" onkeyup='check();' required/>
                                             </td>
                                         </tr>
                                         <tr>
@@ -194,7 +197,7 @@
                                                 <fmt:message key="confirmPassword"/>
                                             </td>
                                             <td>
-                                                <input type="password" name="confirmPass" onkeyup='check();'
+                                                <input type="password" class="form-control confirmPass" name="confirmPass" onkeyup='check();'
                                                        required/><span class='message'></span>
                                             </td>
                                         </tr>

@@ -3,7 +3,7 @@ package com.javalab.movieapp.action.admin;
 import com.javalab.movieapp.action.Action;
 import com.javalab.movieapp.action.ActionResult;
 import com.javalab.movieapp.dao.LanguageDAO;
-import com.javalab.movieapp.entity.Language;
+import com.javalab.movieapp.entities.Language;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +14,7 @@ import java.util.List;
 import static com.javalab.movieapp.Constants.*;
 
 public class ListLanguageAction implements Action {
+
     private static final Logger LOGGER = Logger.getLogger(ListLanguageAction.class);
 
 

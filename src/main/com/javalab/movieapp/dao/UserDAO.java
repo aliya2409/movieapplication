@@ -1,19 +1,22 @@
 package com.javalab.movieapp.dao;
 
-import com.javalab.movieapp.entity.User;
+import com.javalab.movieapp.entities.User;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAO implements AbstractDAO<Long, User> {
+
     public static final String USER_ID_COLUMN = "user_id";
     public static final String USER_LOGIN_COLUMN = "user_login";
     public static final String USER_BIRTH_DATE_COLUMN = "user_birth_date";
     public static final String USER_MAIL_COLUMN = "user_mail";
     public static final String USER_PASSWORD_COLUMN = "user_password";
     public static final String USER_ROLE_ID_COLUMN = "user_role_id";
+
     public static final String FIND_ALL_USERS_SQL_QUERY = "SELECT user_id, user_login, user_password, user_mail, user_birth_date, user_role_id FROM user;";
     public static final String FIND_USER_BY_ID_SQL_QUERY = "SELECT user_id, user_login, user_password, user_mail, user_birth_date, user_role_id FROM user WHERE user_id = ?;";
     public static final String DELETE_USER_BY_ID_SQL_QUERY = "DELETE FROM user WHERE user_id = ?;";
@@ -23,6 +26,7 @@ public class UserDAO implements AbstractDAO<Long, User> {
     public static final String CHANGE_PASSWORD_SQL_QUERY = "UPDATE user SET user_password = ? WHERE user_id = ?;";
     public static final String CHANGE_USER_INFO_SQL_QUERY = "UPDATE user SET user_login = ?, user_birth_date = ? WHERE user_id = ?;";
     public static final String FIND_USER_BY_EMAIL_SQL_QUERY = "SELECT user_id, user_login, user_password, user_mail, user_birth_date, user_role_id FROM user WHERE user_mail = ?;" ;
+
     private final ConnectionPool CONNECTION_POOL = ConnectionPool.getInstance();
 
 
@@ -46,14 +50,13 @@ public class UserDAO implements AbstractDAO<Long, User> {
     }
 
     public User findUser(String email, String password) throws SQLException {
-        User user = null;
+        User user = new User();
         Connection cn =  ConnectionPool.getInstance().takeConnection();
         try (PreparedStatement st = cn.prepareStatement(FIND_USER_BY_EMAIL_AND_PASSWORD_SQL_QUERY)) {
             st.setString(1, email);
             st.setString(2, password);
             try (ResultSet resultSet =
                          st.executeQuery()) {
-                user = new User();
                 while (resultSet.next()) {
                    setUserCharacteristics(user, resultSet);
                 }
@@ -130,6 +133,10 @@ public class UserDAO implements AbstractDAO<Long, User> {
             CONNECTION_POOL.releaseConnection(cn);
         }
         return true;
+    }
+
+    public static java.sql.Date asDate(LocalDate localDate) {
+        return (Date) Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
     }
 
     @Override

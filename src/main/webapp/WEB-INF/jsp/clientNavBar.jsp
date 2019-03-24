@@ -35,8 +35,8 @@
                     <fmt:message key="changeLocale"/>
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="${movieServlet}/changeLocale?languageId=1&location=${requestScope['javax.servlet.forward.request_uri']}">English</a>
-                    <a class="dropdown-item" href="${movieServlet}/changeLocale?languageId=2&location=${requestScope['javax.servlet.forward.request_uri']}">Русский</a>
+                    <a class="dropdown-item" href="${movieServlet}/changeLocale?languageId=1&location=${jspName}">English</a>
+                    <a class="dropdown-item" href="${movieServlet}/changeLocale?languageId=2&location=${jspName}">Русский</a>
                 </div>
             </li>
             <c:choose>
