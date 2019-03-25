@@ -39,11 +39,11 @@ public class AddUpdateUserAction implements Action {
             user.setEmail(mail);
             user.setBirthDate(birthDate);
             UserDAO userDAO = new UserDAO();
-            if (UPDATE_USER_ACTION.equals(action))
-                userDAO.update(user);
-            else if (ADD_USER_ACTION.equals(action)) {
+            if (UPDATE_USER_ACTION.equals(action)){
                 Long userId = Long.valueOf(validateLong(req.getParameter(USER_ID_PARAM)));
                 user.setId(userId);
+                userDAO.update(user);
+            } else if (ADD_USER_ACTION.equals(action)) {
                 User foundByEmail = userDAO.findUserByEmail(user.getEmail());
                 if (isntEmptyUser(foundByEmail)) {
                     req.setAttribute(ERROR_ATTRIB, EMAIL_IS_ALREADY_TAKEN_ERROR);

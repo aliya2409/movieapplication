@@ -36,6 +36,7 @@ public class SearchMovieAction implements Action {
                 genres = genreDAO.findMovieGenres(movie.getId(), languageId);
                 movie.setGenres(genres);
             }
+            req.setAttribute(MOVIE_LIST_ATTRIB, movies);
         } catch (SQLException e) {
             LOGGER.error(e);
             req.setAttribute(ERROR_ATTRIB, DATABASE_ERROR);

@@ -2,8 +2,8 @@ package com.javalab.movieapp.action;
 
 public class ActionResult {
 
-    String path;
-    boolean isRedirect;
+    private String path;
+    private boolean isRedirect;
 
     public ActionResult(String path, boolean isRedirect) {
         this.path = path;

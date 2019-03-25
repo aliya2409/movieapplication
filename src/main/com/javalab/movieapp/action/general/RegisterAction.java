@@ -20,7 +20,7 @@ import static com.javalab.movieapp.utils.validators.UserValidator.isntEmptyUser;
 
 public class RegisterAction implements Action {
 
-    public static final String DATE_INPUT_FORMAT = "yyyy-MM-d";
+    private static final String DATE_INPUT_FORMAT = "yyyy-MM-d";
     private static final Logger LOGGER = Logger.getLogger(RegisterAction.class);
 
     public ActionResult execute(HttpServletRequest req, HttpServletResponse res) {

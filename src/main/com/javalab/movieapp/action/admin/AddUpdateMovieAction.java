@@ -32,6 +32,7 @@ public class AddUpdateMovieAction implements Action {
             LocalTime duration = LocalTime.parse(validateNullOrEmpty(req.getParameter(DURATION_PARAM)));
             Long budget = Long.valueOf(validateLong(req.getParameter(BUDGET_PARAM)));
             LocalDate releaseDate = LocalDate.parse(validateNullOrEmpty(req.getParameter(RELEASE_DATE_PARAM)));
+            String description = validateNullOrEmpty(req.getParameter(DESCRIPTION_PARAM));
             Part filePart = req.getPart(IMAGE_PARAM);
             InputStream image = filePart.getInputStream();
             MovieDAO movieDAO = new MovieDAO();
@@ -40,6 +41,7 @@ public class AddUpdateMovieAction implements Action {
             movie.setDuration(duration);
             movie.setBudget(budget);
             movie.setReleaseDate(releaseDate);
+            movie.setDescription(description);
             movie.setImage(image);
             if (ADD_MOVIE_ACTION.equals(action)) {
                 movieDAO.create(movie);

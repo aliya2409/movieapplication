@@ -23,11 +23,11 @@
     });
 </script>
 <script>var check = function () {
-    if (document.getElementsByClassName('newPass').value ==
-        document.getElementsByClassName('confirmPass').value) {
-        document.getElementsByClassName('message').innerHTML = '\u{1F44D}';
+    if (document.getElementById('newPass').value ==
+        document.getElementById('confirmPass').value) {
+        document.getElementById('message').innerHTML = '\u{1F44D}';
     } else {
-        document.getElementsByClassName('message').innerHTML = '\u{1F44E}';
+        document.getElementById('message').innerHTML = '\u{1F44E}';
     }
 }</script>
 <head>
@@ -81,7 +81,7 @@
                         <fmt:message key="newPassword"/>
                     </td>
                     <td>
-                        <input name="pass" class="form-control newPass" id="newPass" type="password" onkeyup='check();' required/>
+                        <input name="pass" class="form-control" id="newPass" type="password" onkeyup='check();' required/>
                     </td>
                 </tr>
                 <tr>
@@ -89,7 +89,7 @@
                         <fmt:message key="confirmPassword"/>
                     </td>
                     <td>
-                        <input type="password" class="form-control confirmPass" name="confirmPass" id="confirmPass" onkeyup='check();' required/>
+                        <input type="password" class="form-control" name="confirmPass" id="confirmPass" onkeyup='check();' required/>
                     </td>
                     <td>
                         <span id='message'></span>
@@ -189,7 +189,7 @@
                                                 <fmt:message key="newPassword"/>
                                             </td>
                                             <td>
-                                                <input name="pass" class="form-control newPass" type="password" onkeyup='check();' required/>
+                                                <input name="pass" class="form-control" type="password" onkeyup='check();' required/>
                                             </td>
                                         </tr>
                                         <tr>
@@ -197,7 +197,7 @@
                                                 <fmt:message key="confirmPassword"/>
                                             </td>
                                             <td>
-                                                <input type="password" class="form-control confirmPass" name="confirmPass" onkeyup='check();'
+                                                <input type="password" class="form-control" name="confirmPass" onkeyup='check();'
                                                        required/><span class='message'></span>
                                             </td>
                                         </tr>
@@ -206,7 +206,7 @@
                                                 <fmt:message key="birthDate"/>
                                             </td>
                                             <td>
-                                                <input type="text" name="birthD" class="datepicker" required/>
+                                                <input type="text" name="birthD" class="datepicker form-control" required/>
                                             </td>
                                         </tr>
                                         <tr>

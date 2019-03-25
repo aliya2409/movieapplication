@@ -16,8 +16,8 @@ import static com.javalab.movieapp.Constants.*;
 
 public class MovieAppServlet extends HttpServlet {
     private static final Logger LOGGER = Logger.getLogger(MovieAppServlet.class);
-    public static final String JSP_LOCATION = "/WEB-INF/jsp";
-    ActionFactory actionFactory = new ActionFactory();
+    private static final String JSP_LOCATION = "/WEB-INF/jsp";
+    private final ActionFactory actionFactory = new ActionFactory();
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

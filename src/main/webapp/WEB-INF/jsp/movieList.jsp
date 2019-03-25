@@ -72,6 +72,9 @@
                     <input name="budget" id="budget" class="form-control" type="number" required/>
                     <label for="datepicker"><fmt:message key="releaseDate"/></label>
                     <input type="text" class="form-control" name="releaseDate" id="datepicker" required/>
+                    <label for="description"><fmt:message key="description"/></label>
+                    <input type="text" class="form-control" name="description" id="description"
+                           required/>
                     <br>
                     <div class="custom-file mb-3">
                         <input type="file" class="custom-file-input form-control" accept="image/jpeg,image/png"

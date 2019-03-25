@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Locale;
 
 import static com.javalab.movieapp.Constants.*;
+import static com.javalab.movieapp.utils.Formatter.formatDate;
 import static com.javalab.movieapp.utils.validators.InputValidator.validateCrucialParamID;
 
 public class ShowMovieCrewAction implements Action {
@@ -30,6 +32,10 @@ public class ShowMovieCrewAction implements Action {
             Long languageId = (Long) req.getSession().getAttribute(LANGUAGE_ID_ATTRIB);
             PersonDAO personDAO = new PersonDAO();
             List<Person> movieCrew = personDAO.findMovieCrew(movieId, languageId);
+            Locale locale = new Locale((String) req.getSession().getAttribute(LOCALE_ATTRIB));
+            for(Person person : movieCrew){
+                person.setFormattedBirthDate(formatDate(locale, person.getBirthDate()));
+            }
             req.setAttribute(MOVIE_ID_PARAM, movieId);
             req.setAttribute(PERSON_LIST_ATTRIB, movieCrew);
         } catch (SQLException e) {

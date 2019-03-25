@@ -6,7 +6,7 @@ import java.io.IOException;
 public class CharsetFilter implements Filter {
     private String encoding;
 
-    public void init(FilterConfig config) throws ServletException {
+    public void init(FilterConfig config) {
     }
 
     public void doFilter(

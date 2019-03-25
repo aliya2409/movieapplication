@@ -9,9 +9,9 @@ import java.util.Map;
 
 public class ActionFactory {
 
-    static Map<String, Action> actions = new HashMap<>();
+    private static final Map<String, Action> actions = new HashMap<>();
 
-    {
+    static {
         actions.put("/login", new LogInAction());
         actions.put("/logout", new LogOutAction());
         actions.put("/register", new RegisterAction());
@@ -57,9 +57,7 @@ public class ActionFactory {
         actions.put("/authorize", new LoadAuthorizationPageAction());
     }
 
-    public Action getAction(String answerName) {
-
-        Action action = actions.get(answerName);
-        return action;
+    public Action getAction(String requestedActionName) {
+        return actions.get(requestedActionName);
     }
 }

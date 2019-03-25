@@ -20,7 +20,7 @@ public class ListUserAction implements Action {
     private static final Logger LOGGER = Logger.getLogger(ListUserAction.class);
 
     @Override
-    public ActionResult execute(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+    public ActionResult execute(HttpServletRequest req, HttpServletResponse res) {
         try {
             UserDAO userDAO = new UserDAO();
             List<User> users = userDAO.findAll();

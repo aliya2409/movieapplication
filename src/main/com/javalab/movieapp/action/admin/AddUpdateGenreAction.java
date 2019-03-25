@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 
 import static com.javalab.movieapp.Constants.*;
-import static com.javalab.movieapp.utils.validators.InputValidator.validateCrucialParamID;
 import static com.javalab.movieapp.utils.validators.InputValidator.validateLong;
 import static com.javalab.movieapp.utils.validators.InputValidator.validateName;
 

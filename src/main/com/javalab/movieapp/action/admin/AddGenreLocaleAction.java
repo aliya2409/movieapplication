@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.sql.SQLException;
+import java.util.Objects;
 
 import static com.javalab.movieapp.Constants.*;
-import static com.javalab.movieapp.Constants.DATABASE_ERROR;
 import static com.javalab.movieapp.utils.validators.InputValidator.validateLong;
 import static com.javalab.movieapp.utils.validators.InputValidator.validateName;
 
@@ -26,7 +26,7 @@ public class AddGenreLocaleAction implements Action {
         try {
             Long UILanguageId = (Long) req.getSession().getAttribute(LANGUAGE_ID_ATTRIB);
             Long languageId = Long.valueOf(validateLong(req.getParameter(LANGUAGE_ID_PARAM)));
-            if(UILanguageId != languageId){
+            if(!Objects.equals(UILanguageId, languageId)){
             Long genreId = Long.valueOf(validateLong(req.getParameter(GENRE_ID_PARAM)));
             String genreName = validateName(req.getParameter(NAME_PARAM));
             GenreDAO genreDAO = new GenreDAO();

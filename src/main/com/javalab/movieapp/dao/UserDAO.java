@@ -10,22 +10,22 @@ import java.util.List;
 
 public class UserDAO implements AbstractDAO<Long, User> {
 
-    public static final String USER_ID_COLUMN = "user_id";
-    public static final String USER_LOGIN_COLUMN = "user_login";
-    public static final String USER_BIRTH_DATE_COLUMN = "user_birth_date";
-    public static final String USER_MAIL_COLUMN = "user_mail";
-    public static final String USER_PASSWORD_COLUMN = "user_password";
-    public static final String USER_ROLE_ID_COLUMN = "user_role_id";
+    private static final String USER_ID_COLUMN = "user_id";
+    private static final String USER_LOGIN_COLUMN = "user_login";
+    private static final String USER_BIRTH_DATE_COLUMN = "user_birth_date";
+    private static final String USER_MAIL_COLUMN = "user_mail";
+    private static final String USER_PASSWORD_COLUMN = "user_password";
+    private static final String USER_ROLE_ID_COLUMN = "user_role_id";
 
-    public static final String FIND_ALL_USERS_SQL_QUERY = "SELECT user_id, user_login, user_password, user_mail, user_birth_date, user_role_id FROM user;";
-    public static final String FIND_USER_BY_ID_SQL_QUERY = "SELECT user_id, user_login, user_password, user_mail, user_birth_date, user_role_id FROM user WHERE user_id = ?;";
-    public static final String DELETE_USER_BY_ID_SQL_QUERY = "DELETE FROM user WHERE user_id = ?;";
-    public static final String ADD_USER_SQL_QUERY = "INSERT INTO user (user_login, user_password, user_mail, user_birth_date, user_role_id) VALUES (?, ?, ?, ?, ?);";
-    public static final String UPDATE_USER_SQL_QUERY = "UPDATE user SET user_login = ?, user_password = ?, user_mail = ?, user_birth_date = ?, user_role_id = ? WHERE user_id = ?;";
-    public static final String FIND_USER_BY_EMAIL_AND_PASSWORD_SQL_QUERY = "SELECT user_id, user_login, user_password, user_mail, user_birth_date, user_role_id FROM  user WHERE user_mail = ? AND user_password = ?;";
-    public static final String CHANGE_PASSWORD_SQL_QUERY = "UPDATE user SET user_password = ? WHERE user_id = ?;";
-    public static final String CHANGE_USER_INFO_SQL_QUERY = "UPDATE user SET user_login = ?, user_birth_date = ? WHERE user_id = ?;";
-    public static final String FIND_USER_BY_EMAIL_SQL_QUERY = "SELECT user_id, user_login, user_password, user_mail, user_birth_date, user_role_id FROM user WHERE user_mail = ?;" ;
+    private static final String FIND_ALL_USERS_SQL_QUERY = "SELECT user_id, user_login, user_password, user_mail, user_birth_date, user_role_id FROM user;";
+    private static final String FIND_USER_BY_ID_SQL_QUERY = "SELECT user_id, user_login, user_password, user_mail, user_birth_date, user_role_id FROM user WHERE user_id = ?;";
+    private static final String DELETE_USER_BY_ID_SQL_QUERY = "DELETE FROM user WHERE user_id = ?;";
+    private static final String ADD_USER_SQL_QUERY = "INSERT INTO user (user_login, user_password, user_mail, user_birth_date, user_role_id) VALUES (?, ?, ?, ?, ?);";
+    private static final String UPDATE_USER_SQL_QUERY = "UPDATE user SET user_login = ?, user_password = ?, user_mail = ?, user_birth_date = ?, user_role_id = ? WHERE user_id = ?;";
+    private static final String FIND_USER_BY_EMAIL_AND_PASSWORD_SQL_QUERY = "SELECT user_id, user_login, user_password, user_mail, user_birth_date, user_role_id FROM  user WHERE user_mail = ? AND user_password = ?;";
+    private static final String CHANGE_PASSWORD_SQL_QUERY = "UPDATE user SET user_password = ? WHERE user_id = ?;";
+    private static final String CHANGE_USER_INFO_SQL_QUERY = "UPDATE user SET user_login = ?, user_birth_date = ? WHERE user_id = ?;";
+    private static final String FIND_USER_BY_EMAIL_SQL_QUERY = "SELECT user_id, user_login, user_password, user_mail, user_birth_date, user_role_id FROM user WHERE user_mail = ?;";
 
     private final ConnectionPool CONNECTION_POOL = ConnectionPool.getInstance();
 
@@ -51,14 +51,14 @@ public class UserDAO implements AbstractDAO<Long, User> {
 
     public User findUser(String email, String password) throws SQLException {
         User user = new User();
-        Connection cn =  ConnectionPool.getInstance().takeConnection();
+        Connection cn = ConnectionPool.getInstance().takeConnection();
         try (PreparedStatement st = cn.prepareStatement(FIND_USER_BY_EMAIL_AND_PASSWORD_SQL_QUERY)) {
             st.setString(1, email);
             st.setString(2, password);
             try (ResultSet resultSet =
                          st.executeQuery()) {
                 while (resultSet.next()) {
-                   setUserCharacteristics(user, resultSet);
+                    setUserCharacteristics(user, resultSet);
                 }
             }
         } finally {
@@ -110,7 +110,7 @@ public class UserDAO implements AbstractDAO<Long, User> {
         return user;
     }
 
-    public boolean changePassword(Long id, String password) throws SQLException {
+    public void changePassword(Long id, String password) throws SQLException {
         Connection cn = CONNECTION_POOL.takeConnection();
         try (PreparedStatement st = cn.prepareStatement(CHANGE_PASSWORD_SQL_QUERY)) {
             st.setString(1, password);
@@ -119,10 +119,9 @@ public class UserDAO implements AbstractDAO<Long, User> {
         } finally {
             CONNECTION_POOL.releaseConnection(cn);
         }
-        return true;
     }
 
-    public boolean changeUserInfo(Long id, String login, LocalDate birthDate) throws SQLException {
+    public void changeUserInfo(Long id, String login, LocalDate birthDate) throws SQLException {
         Connection cn = CONNECTION_POOL.takeConnection();
         try (PreparedStatement st = cn.prepareStatement(CHANGE_USER_INFO_SQL_QUERY)) {
             st.setString(1, login);
@@ -132,7 +131,6 @@ public class UserDAO implements AbstractDAO<Long, User> {
         } finally {
             CONNECTION_POOL.releaseConnection(cn);
         }
-        return true;
     }
 
     public static java.sql.Date asDate(LocalDate localDate) {
@@ -140,13 +138,12 @@ public class UserDAO implements AbstractDAO<Long, User> {
     }
 
     @Override
-    public boolean delete(Long id) throws SQLException {
-        boolean isDeleted = delete(id, DELETE_USER_BY_ID_SQL_QUERY);
-        return isDeleted;
+    public void delete(Long id) throws SQLException {
+        delete(id, DELETE_USER_BY_ID_SQL_QUERY);
     }
 
     @Override
-    public boolean create(User entity) throws SQLException {
+    public void create(User entity) throws SQLException {
         Connection cn = CONNECTION_POOL.takeConnection();
         try (PreparedStatement st = cn.prepareStatement(ADD_USER_SQL_QUERY)) {
             setUserCharacteristics(entity, st);
@@ -154,11 +151,10 @@ public class UserDAO implements AbstractDAO<Long, User> {
         } finally {
             CONNECTION_POOL.releaseConnection(cn);
         }
-        return true;
     }
 
     @Override
-    public boolean update(User entity) throws SQLException {
+    public void update(User entity) throws SQLException {
         Connection cn = CONNECTION_POOL.takeConnection();
         try (PreparedStatement st = cn.prepareStatement(UPDATE_USER_SQL_QUERY)) {
             setUserCharacteristics(entity, st);
@@ -167,7 +163,6 @@ public class UserDAO implements AbstractDAO<Long, User> {
         } finally {
             CONNECTION_POOL.releaseConnection(cn);
         }
-        return true;
     }
 
     private void setUserCharacteristics(User entity, PreparedStatement st) throws SQLException {
@@ -180,11 +175,11 @@ public class UserDAO implements AbstractDAO<Long, User> {
 
     @Override
     public List<User> findAll(long languageId) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public User findEntityById(Long id, long languageId) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 }

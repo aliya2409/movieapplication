@@ -12,10 +12,8 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
-import java.util.Locale;
 
 import static com.javalab.movieapp.Constants.*;
-import static com.javalab.movieapp.utils.Formatter.formatDate;
 import static com.javalab.movieapp.utils.validators.InputValidator.validateEmail;
 import static com.javalab.movieapp.utils.validators.InputValidator.validateNullOrEmpty;
 

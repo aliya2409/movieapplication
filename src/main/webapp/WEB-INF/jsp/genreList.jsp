@@ -57,7 +57,6 @@
                     <th><fmt:message key="name"/></th>
                     <th></th>
                     <th></th>
-                    <th></th>
                 </tr>
                 </thead>
                 <c:forEach items="${requestScope.genres}" var="genre">

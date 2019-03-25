@@ -46,13 +46,15 @@
                     <label for="nameAdd"><fmt:message key="name"/></label>
                     <input type="text" class="form-control" id="nameAdd" name="name" value="" required>
                 </div>
+                <br>
                 <button type="submit" class="btn btn-primary"><fmt:message key="submit"/></button>
             </form>
         </div>
         <table class="table table-hover">
             <thead>
             <tr>
-                <th><fmt:message key="name"/></th>
+                <th><fmt:message key="language"/></th>
+                <th></th>
                 <th></th>
                 <th></th>
             </tr>

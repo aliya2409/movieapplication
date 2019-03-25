@@ -42,10 +42,10 @@ public class ShowMovieInfoAction implements Action {
             movie.setFormattedBudget((localizedBudget.format(movie.getBudget())));
             movie.setFormattedReleaseDate(formatDate(locale, movie.getReleaseDate()));
             List<Genre> genres = genreDAO.findMovieGenres(movieId, languageId);
+            movie.setGenres(genres);
             if (user != null && user.getRoleId() == USER_ROLE_ID) {
                 movie = movieDAO.findUsersLikeRate(movie, user.getId());
             }
-            movie.setGenres(genres);
             req.setAttribute(MOVIE_ATTRIB, movie);
         } catch (SQLException e) {
             LOGGER.error(e);

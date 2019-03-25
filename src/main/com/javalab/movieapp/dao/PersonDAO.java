@@ -11,25 +11,25 @@ import java.util.List;
 
 public class PersonDAO implements AbstractDAO<Long, Person> {
 
-    public static final String PERSON_NAME_ORIGINAL_COLUMN = "person_name_original";
-    public static final String PERSON_SURNAME_ORIGINAL_COLUMN = "person_surname_original";
-    public static final String PERSON_BIRTH_DATE_COLUMN = "person_birth_date";
-    public static final String PERSON_IMAGE_COLUMN = "person_image";
-    public static final String PERSON_ID_COLUMN = "person_id";
-    public static final String PERSON_NAME_TRANSLATED_COLUMN = "person_name_translated";
-    public static final String PERSON_SURNAME_TRANSLATED_COLUMN = "person_surname_translated";
-    public static final String PERSON_ROLE_ID_COLUMN = "person_role_id";
+    private static final String PERSON_NAME_ORIGINAL_COLUMN = "person_name_original";
+    private static final String PERSON_SURNAME_ORIGINAL_COLUMN = "person_surname_original";
+    private static final String PERSON_BIRTH_DATE_COLUMN = "person_birth_date";
+    private static final String PERSON_IMAGE_COLUMN = "person_image";
+    private static final String PERSON_ID_COLUMN = "person_id";
+    private static final String PERSON_NAME_TRANSLATED_COLUMN = "person_name_translated";
+    private static final String PERSON_SURNAME_TRANSLATED_COLUMN = "person_surname_translated";
+    private static final String PERSON_ROLE_ID_COLUMN = "person_role_id";
 
-    public static final String FIND_ALL_PEOPLE_SQL_QUERY = "SELECT p.person_id, p.person_birth_date, p.person_surname_original, p.person_name_original, p.person_image, (SELECT pi.person_surname_translated FROM person_info pi WHERE pi.person_id = p.person_id AND pi.language_id = ?) AS person_surname_translated, (SELECT pi.person_name_translated FROM person_info pi WHERE pi.person_id = p.person_id AND pi.language_id = ?) AS person_name_translated FROM person p;";
-    public static final String FIND_PERSON_BY_ID_SQL_QUERY = "SELECT  p.person_id, p.person_birth_date, p.person_surname_original, p.person_name_original, p.person_image, pi.person_surname_translated, pi.person_name_translated FROM person p JOIN person_info pi USING (person_id) WHERE person_id = ? AND pi.language_id = ?;";
-    public static final String DELETE_PERSON_BY_ID_SQL_QUERY = "DELETE FROM person WHERE person_id = ?;";
-    public static final String ADD_PERSON_SQL_QUERY = "INSERT INTO person(person_name_original, person_surname_original, person_birth_date, person_image) VALUES (?, ?, ?, ?);";
-    public static final String UPDATE_PERSON_SQL_QUERY = "UPDATE person SET person_name_original = ?, person_surname_original = ?, person_birth_date = ?, person_image = ? WHERE person_id = ?;";
-    public static final String FIND_MOVIE_CREW_SQL_QUERY = "SELECT p.person_id, p.person_birth_date, p.person_surname_original, p.person_name_original, p.person_image, pi.person_surname_translated, pi.person_name_translated, mp.person_role_id FROM person p JOIN person_info pi USING (person_id) JOIN movie_person mp USING (person_id) WHERE movie_id = ? AND pi.language_id = ? ORDER BY mp.person_role_id;";
-    public static final String ADD_PERSON_TO_MOVIE_CREW_SQL_QUERY = "INSERT INTO movie_person (movie_id, person_id, person_role_id) VALUES (?, (SELECT p.person_id FROM person p WHERE p.person_name_original = ? AND p.person_surname_original = ?), ?);";
-    public static final String DELETE_PERSON_FROM_MOVIE_CREW_SQL_QUERY = "DELETE FROM movie_person WHERE movie_id = ? AND person_id = ?;";
-    public static final String ADD_PERSON_INFO_SQL_QUERY = "INSERT INTO person_info (person_id, language_id, person_name_translated,  person_surname_translated) VALUES ((SELECT p.person_id FROM person p WHERE p.person_name_original = ? AND p.person_surname_original = ?), ?, ?, ?);";
-    public static final String UPDATE_PERSON_INFO_SQL_QUERY = "UPDATE person_info SET person_name_translated =?, person_surname_translated = ? WHERE person_id = (SELECT p.person_id FROM person p WHERE p.person_name_original = ? AND p.person_surname_original = ?) AND language_id = ?;";
+    private static final String FIND_ALL_PEOPLE_SQL_QUERY = "SELECT p.person_id, p.person_birth_date, p.person_surname_original, p.person_name_original, p.person_image, (SELECT pi.person_surname_translated FROM person_info pi WHERE pi.person_id = p.person_id AND pi.language_id = ?) AS person_surname_translated, (SELECT pi.person_name_translated FROM person_info pi WHERE pi.person_id = p.person_id AND pi.language_id = ?) AS person_name_translated FROM person p;";
+    private static final String FIND_PERSON_BY_ID_SQL_QUERY = "SELECT  p.person_id, p.person_birth_date, p.person_surname_original, p.person_name_original, p.person_image, pi.person_surname_translated, pi.person_name_translated FROM person p JOIN person_info pi USING (person_id) WHERE person_id = ? AND pi.language_id = ?;";
+    private static final String DELETE_PERSON_BY_ID_SQL_QUERY = "DELETE FROM person WHERE person_id = ?;";
+    private static final String ADD_PERSON_SQL_QUERY = "INSERT INTO person(person_name_original, person_surname_original, person_birth_date, person_image) VALUES (?, ?, ?, ?);";
+    private static final String UPDATE_PERSON_SQL_QUERY = "UPDATE person SET person_name_original = ?, person_surname_original = ?, person_birth_date = ?, person_image = ? WHERE person_id = ?;";
+    private static final String FIND_MOVIE_CREW_SQL_QUERY = "SELECT p.person_id, p.person_birth_date, p.person_surname_original, p.person_name_original, p.person_image, pi.person_surname_translated, pi.person_name_translated, mp.person_role_id FROM person p JOIN person_info pi USING (person_id) JOIN movie_person mp USING (person_id) WHERE movie_id = ? AND pi.language_id = ? ORDER BY mp.person_role_id;";
+    private static final String ADD_PERSON_TO_MOVIE_CREW_SQL_QUERY = "INSERT INTO movie_person (movie_id, person_id, person_role_id) VALUES (?, (SELECT p.person_id FROM person p WHERE p.person_name_original = ? AND p.person_surname_original = ?), ?);";
+    private static final String DELETE_PERSON_FROM_MOVIE_CREW_SQL_QUERY = "DELETE FROM movie_person WHERE movie_id = ? AND person_id = ?;";
+    private static final String ADD_PERSON_INFO_SQL_QUERY = "INSERT INTO person_info (person_id, language_id, person_name_translated,  person_surname_translated) VALUES ((SELECT p.person_id FROM person p WHERE p.person_name_original = ? AND p.person_surname_original = ?), ?, ?, ?);";
+    private static final String UPDATE_PERSON_INFO_SQL_QUERY = "UPDATE person_info SET person_name_translated =?, person_surname_translated = ? WHERE person_id = (SELECT p.person_id FROM person p WHERE p.person_name_original = ? AND p.person_surname_original = ?) AND language_id = ?;";
 
     private final ConnectionPool CONNECTION_POOL = ConnectionPool.getInstance();
 
@@ -54,7 +54,7 @@ public class PersonDAO implements AbstractDAO<Long, Person> {
         return movieCrew;
     }
 
-    public boolean addPersonToMovieCrew(long movieId, Person person) throws SQLException {
+    public void addPersonToMovieCrew(long movieId, Person person) throws SQLException {
         Connection cn = CONNECTION_POOL.takeConnection();
         try (PreparedStatement st = cn.prepareStatement(ADD_PERSON_TO_MOVIE_CREW_SQL_QUERY)) {
             st.setLong(1, movieId);
@@ -63,20 +63,18 @@ public class PersonDAO implements AbstractDAO<Long, Person> {
             st.setInt(4, person.getRoleId());
             st.executeUpdate();
         }
-        return true;
     }
 
-    public boolean deletePersonFromMovieCrew(long movieId, long personId) throws SQLException {
+    public void deletePersonFromMovieCrew(long movieId, long personId) throws SQLException {
         Connection cn = CONNECTION_POOL.takeConnection();
         try (PreparedStatement st = cn.prepareStatement(DELETE_PERSON_FROM_MOVIE_CREW_SQL_QUERY)) {
             st.setLong(1, movieId);
             st.setLong(2, personId);
             st.executeUpdate();
         }
-        return true;
     }
 
-    public boolean addPersonInfo(Person person, long languageId) throws SQLException {
+    public void addPersonInfo(Person person, long languageId) throws SQLException {
         Connection cn = CONNECTION_POOL.takeConnection();
         try (PreparedStatement st = cn.prepareStatement(ADD_PERSON_INFO_SQL_QUERY)) {
             st.setString(1, person.getOriginalName());
@@ -88,10 +86,9 @@ public class PersonDAO implements AbstractDAO<Long, Person> {
         } finally {
             CONNECTION_POOL.releaseConnection(cn);
         }
-        return true;
     }
 
-    public boolean updatePersonInfo(Person person, long languageId) throws SQLException {
+    public void updatePersonInfo(Person person, long languageId) throws SQLException {
         Connection cn = CONNECTION_POOL.takeConnection();
         try (PreparedStatement st = cn.prepareStatement(UPDATE_PERSON_INFO_SQL_QUERY)) {
             st.setString(1, person.getTranslatedName());
@@ -103,7 +100,6 @@ public class PersonDAO implements AbstractDAO<Long, Person> {
         } finally {
             CONNECTION_POOL.releaseConnection(cn);
         }
-        return true;
     }
 
     @Override
@@ -159,13 +155,12 @@ public class PersonDAO implements AbstractDAO<Long, Person> {
     }
 
     @Override
-    public boolean delete(Long id) throws SQLException {
-        boolean isDeleted = delete(id, DELETE_PERSON_BY_ID_SQL_QUERY);
-        return isDeleted;
+    public void delete(Long id) throws SQLException {
+      delete(id, DELETE_PERSON_BY_ID_SQL_QUERY);
     }
 
     @Override
-    public boolean create(Person entity) throws SQLException {
+    public void create(Person entity) throws SQLException {
         Connection cn = CONNECTION_POOL.takeConnection();
         try (PreparedStatement st = cn.prepareStatement(ADD_PERSON_SQL_QUERY)) {
             setPersonParameters(entity, st);
@@ -173,11 +168,10 @@ public class PersonDAO implements AbstractDAO<Long, Person> {
         } finally {
             CONNECTION_POOL.releaseConnection(cn);
         }
-        return true;
     }
 
     @Override
-    public boolean update(Person entity) throws SQLException {
+    public void update(Person entity) throws SQLException {
         Connection cn = CONNECTION_POOL.takeConnection();
         try (PreparedStatement st = cn.prepareStatement(UPDATE_PERSON_SQL_QUERY)) {
             setPersonParameters(entity, st);
@@ -186,7 +180,6 @@ public class PersonDAO implements AbstractDAO<Long, Person> {
         } finally {
             CONNECTION_POOL.releaseConnection(cn);
         }
-        return true;
     }
 
     private void setPersonParameters(Person entity, PreparedStatement st) throws SQLException {

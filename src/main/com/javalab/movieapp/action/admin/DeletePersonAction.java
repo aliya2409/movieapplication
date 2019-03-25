@@ -29,7 +29,7 @@ public class DeletePersonAction implements Action {
             req.setAttribute(ERROR_ATTRIB, DATABASE_ERROR);
         } catch (InputValidationException e) {
             LOGGER.error(e);
-            req.setAttribute(ERROR_ATTRIB, DATABASE_ERROR);
+            req.setAttribute(ERROR_ATTRIB, INCORRECT_INPUT_ERROR);
         }
         ActionResult actionResult = new ActionResult(LIST_PERSON_ACTION, false);
         return actionResult;

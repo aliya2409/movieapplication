@@ -23,15 +23,15 @@ public class AddUpdateLanguageAction implements Action {
     public ActionResult execute(HttpServletRequest req, HttpServletResponse res) {
         String action = req.getPathInfo();
         try {
-            Long languageId = Long.valueOf(validateLong(req.getParameter(LANGUAGE_ID_PARAM)));
             String languageName = validateName(req.getParameter(NAME_PARAM));
             Language language = new Language();
-            language.setId(languageId);
             language.setName(languageName);
             LanguageDAO languageDAO = new LanguageDAO();
             if (ADD_LANGUAGE_ACTION.equals(action)) {
                 languageDAO.create(language);
             } else if (UPDATE_LANGUAGE_ACTION.equals(action)) {
+                Long languageId = Long.valueOf(validateLong(req.getParameter(LANGUAGE_ID_PARAM)));
+                language.setId(languageId);
                 languageDAO.update(language);
             }
         } catch (SQLException e) {
