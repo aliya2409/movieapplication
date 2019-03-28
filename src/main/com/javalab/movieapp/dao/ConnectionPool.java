@@ -15,7 +15,6 @@ import static java.util.ResourceBundle.getBundle;
 
 public class ConnectionPool {
 
-    private static final int DEFAULT_POOL_SIZE = 10;
     private static final String SERVER_TIME_ZONE = "GMT+0:00";
     private static final String DATABASE_RESOURCES = "database";
     private static final String DB_DRIVER_KEY = "db.driver";

@@ -39,7 +39,7 @@ public class AddUpdateUserAction implements Action {
             user.setEmail(mail);
             user.setBirthDate(birthDate);
             UserDAO userDAO = new UserDAO();
-            if (UPDATE_USER_ACTION.equals(action)){
+            if (UPDATE_USER_ACTION.equals(action)) {
                 Long userId = Long.valueOf(validateLong(req.getParameter(USER_ID_PARAM)));
                 user.setId(userId);
                 userDAO.update(user);

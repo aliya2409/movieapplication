@@ -33,7 +33,7 @@ public class ShowMovieCrewAction implements Action {
             PersonDAO personDAO = new PersonDAO();
             List<Person> movieCrew = personDAO.findMovieCrew(movieId, languageId);
             Locale locale = new Locale((String) req.getSession().getAttribute(LOCALE_ATTRIB));
-            for(Person person : movieCrew){
+            for (Person person : movieCrew) {
                 person.setFormattedBirthDate(formatDate(locale, person.getBirthDate()));
             }
             req.setAttribute(MOVIE_ID_PARAM, movieId);

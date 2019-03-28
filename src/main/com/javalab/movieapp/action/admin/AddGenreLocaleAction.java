@@ -8,7 +8,6 @@ import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import java.sql.SQLException;
 import java.util.Objects;
 
@@ -26,11 +25,11 @@ public class AddGenreLocaleAction implements Action {
         try {
             Long UILanguageId = (Long) req.getSession().getAttribute(LANGUAGE_ID_ATTRIB);
             Long languageId = Long.valueOf(validateLong(req.getParameter(LANGUAGE_ID_PARAM)));
-            if(!Objects.equals(UILanguageId, languageId)){
-            Long genreId = Long.valueOf(validateLong(req.getParameter(GENRE_ID_PARAM)));
-            String genreName = validateName(req.getParameter(NAME_PARAM));
-            GenreDAO genreDAO = new GenreDAO();
-            genreDAO.addGenreLocale(genreId, languageId, genreName);
+            if (!Objects.equals(UILanguageId, languageId)) {
+                Long genreId = Long.valueOf(validateLong(req.getParameter(GENRE_ID_PARAM)));
+                String genreName = validateName(req.getParameter(NAME_PARAM));
+                GenreDAO genreDAO = new GenreDAO();
+                genreDAO.addGenreLocale(genreId, languageId, genreName);
             } else {
                 req.setAttribute(ERROR_ATTRIB, LOCALE_DATA_EXISTS_ERROR);
             }

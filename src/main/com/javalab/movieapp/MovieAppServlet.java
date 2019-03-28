@@ -15,6 +15,7 @@ import java.io.IOException;
 import static com.javalab.movieapp.Constants.*;
 
 public class MovieAppServlet extends HttpServlet {
+    
     private static final Logger LOGGER = Logger.getLogger(MovieAppServlet.class);
     private static final String JSP_LOCATION = "/WEB-INF/jsp";
     private final ActionFactory actionFactory = new ActionFactory();

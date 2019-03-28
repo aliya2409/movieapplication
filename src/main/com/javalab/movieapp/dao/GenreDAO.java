@@ -149,5 +149,4 @@ public class GenreDAO implements AbstractDAO<Long, Genre> {
     public void update(Genre entity) {
         throw new UnsupportedOperationException();
     }
-
 }
