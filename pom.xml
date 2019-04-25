@@ -3,28 +3,39 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>com.javalab.movieapp</groupId>
-    <artifactId>movie-application</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
-
-    <!--&lt;!&ndash; FIXME change it to the project's website &ndash;&gt;-->
-    <!--<url>http://www.example.com</url>-->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.4.RELEASE</version>
+        <relativePath/>
+    </parent>
 
     <properties>
+        <app.version>1.0-SNAPSHOT</app.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <log4j.version>1.2.17</log4j.version>
+        <commons.io.version>2.6</commons.io.version>
     </properties>
 
+    <groupId>com.javalab.movieapp</groupId>
+    <artifactId>movie-application</artifactId>
+    <version>${app.version}</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>moviecore</module>
+        <module>movieweb</module>
+        <module>movieinf</module>
+    </modules>
+
     <repositories>
-    <repository>
-        <id>my-repository</id>
-        <name>new repository</name>
-        <url>https://search.maven.org</url>
-    </repository>
+        <repository>
+            <id>my-repository</id>
+            <name>new repository</name>
+            <url>https://search.maven.org</url>
+        </repository>
     </repositories>
 
     <dependencyManagement>
@@ -34,34 +45,68 @@
                 <artifactId>log4j</artifactId>
                 <version>${log4j.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.javalab.movieapp</groupId>
+                <artifactId>movie-inf</artifactId>
+                <version>${app.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.javalab.movieapp</groupId>
+                <artifactId>movie-core</artifactId>
+                <version>${app.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.javalab.movieapp</groupId>
+                <artifactId>movie-web</artifactId>
+                <type>war</type>
+                <version>${app.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons.io.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
     <dependencies>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>4.0.1</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
-            <version>1.2</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.6</version>
         </dependency>
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
-            <version>1.11</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.11</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -71,13 +116,11 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.13</version>
         </dependency>
     </dependencies>
 
     <build>
         <finalName>movie-application</finalName>
-        <sourceDirectory>src</sourceDirectory>
         <resources>
             <resource>
                 <directory>resources</directory>
