@@ -77,7 +77,6 @@
 
     <build>
         <finalName>movie-application</finalName>
-        <sourceDirectory>src</sourceDirectory>
         <resources>
             <resource>
                 <directory>resources</directory>
