@@ -10,6 +10,7 @@ import java.util.Map;
 public class ActionFactory {
 
     private static final Map<String, Action> actions = new HashMap<>();
+    private static ActionFactory instance;
 
     static {
         actions.put("/login", new LogInAction());
@@ -57,6 +58,12 @@ public class ActionFactory {
         actions.put("/authorize", new LoadAuthorizationPageAction());
     }
 
+    public static ActionFactory getInstance(){
+        if(instance == null){
+            instance = new ActionFactory();
+        }
+        return instance;
+    }
     public Action getAction(String requestedActionName) {
         return actions.get(requestedActionName);
     }

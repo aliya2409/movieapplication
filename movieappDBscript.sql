@@ -84,7 +84,7 @@ CREATE TABLE `movie` (
   `movie_budget` bigint(20) NOT NULL,
   `movie_release_date` date NOT NULL,
   `movie_image` mediumblob NOT NULL,
-  `movie_rating` decimal(2,1) DEFAULT NULL,
+  `movie_rating` decimal(3,1) DEFAULT NULL,
   PRIMARY KEY (`movie_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;

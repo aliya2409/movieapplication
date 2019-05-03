@@ -18,7 +18,7 @@ public class MovieAppServlet extends HttpServlet {
     
     private static final Logger LOGGER = Logger.getLogger(MovieAppServlet.class);
     private static final String JSP_LOCATION = "/WEB-INF/jsp";
-    private final ActionFactory actionFactory = new ActionFactory();
+    private final ActionFactory actionFactory = ActionFactory.getInstance();
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
