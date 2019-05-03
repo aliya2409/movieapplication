@@ -82,6 +82,7 @@ public class Constants {
     public static final Integer INT_MAX_LENGTH = 11;
     public static final Integer MOVIE_RATE_MAX_LENGTH = 2;
     public static final String NUMBER_REGEX = "\\d+";
+    public static final String DATE_REGEX = "([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))";
     public static final String EMAIL_REGEX = "([.[^@\\s]]+)@([.[^@\\s]]+)\\.([a-z]+)";
     public static final String WRONG_PASS_OR_EMAIL_ERROR = "wrongPassOrEmail";
     public static final String INCORRECT_INPUT_ERROR = "incorrectInput";

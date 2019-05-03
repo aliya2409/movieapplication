@@ -29,7 +29,7 @@ public class RegisterAction implements Action {
             user.setLogin(validateName(req.getParameter(LOGIN_PARAM)));
             user.setPassword(PasswordEncryptor.getPasswordEncrypted(validateNullOrEmpty(req.getParameter(PASSWORD_PARAM))));
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_INPUT_FORMAT);
-            LocalDate localDate = LocalDate.parse(validateNullOrEmpty(req.getParameter(BIRTHDATE_PARAM)), formatter);
+            LocalDate localDate = LocalDate.parse(validateDate(req.getParameter(BIRTHDATE_PARAM)), formatter);
             user.setBirthDate(localDate);
             user.setEmail(validateEmail(req.getParameter(EMAIL_PARAM)));
             user.setRoleId(USER_ROLE_ID);

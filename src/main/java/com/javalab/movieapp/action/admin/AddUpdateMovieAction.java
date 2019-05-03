@@ -31,7 +31,7 @@ public class AddUpdateMovieAction implements Action {
             String originalTitle = validateTitle(req.getParameter(ORIGINAL_TITLE_PARAM));
             LocalTime duration = LocalTime.parse(validateNullOrEmpty(req.getParameter(DURATION_PARAM)));
             Long budget = Long.valueOf(validateLong(req.getParameter(BUDGET_PARAM)));
-            LocalDate releaseDate = LocalDate.parse(validateNullOrEmpty(req.getParameter(RELEASE_DATE_PARAM)));
+            LocalDate releaseDate = LocalDate.parse(validateDate(req.getParameter(RELEASE_DATE_PARAM)));
             String description = validateNullOrEmpty(req.getParameter(DESCRIPTION_PARAM));
             Part filePart = req.getPart(IMAGE_PARAM);
             InputStream image = filePart.getInputStream();

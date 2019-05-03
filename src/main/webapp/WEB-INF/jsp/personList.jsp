@@ -93,7 +93,7 @@
                                         <a><fmt:message key="birthDate"/></a>
                                     </td>
                                     <td>
-                                        <input type="text" name="birthD" class="datepicker form-control" required>
+                                        <input type="text" name="birthD" class="datepicker form-control" pattern="([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))" required>
                                     </td>
                                 </tr>
                             </table>
@@ -204,7 +204,7 @@
                                                 <a><fmt:message key="birthDate"/></a>
                                             </td>
                                             <td>
-                                                <input type="text" name="birthD" class="datepicker form-control">
+                                                <input type="text" name="birthD" class="datepicker form-control" pattern="([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))" required>
                                             </td>
                                         </tr>
                                     </table>

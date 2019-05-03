@@ -71,7 +71,7 @@
                     <label for="budget"><fmt:message key="budget"/></label>
                     <input name="budget" id="budget" class="form-control" type="number" required/>
                     <label for="datepicker"><fmt:message key="releaseDate"/></label>
-                    <input type="text" class="form-control" name="releaseDate" id="datepicker" required/>
+                    <input type="text" class="form-control" name="releaseDate" id="datepicker" pattern="([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))" required/>
                     <label for="description"><fmt:message key="description"/></label>
                     <input type="text" class="form-control" name="description" id="description"
                            required/>

@@ -12,6 +12,14 @@ public class InputValidator {
         }
     }
 
+    public static String validateDate(String input) throws InputValidationException{
+        if(input == null || input.isEmpty() || !input.matches(DATE_REGEX)){
+            throw new InputValidationException();
+        } else {
+            return input;
+        }
+    }
+
     public static String validateEmail(String input) throws InputValidationException {
         if (!input.matches(EMAIL_REGEX)) {
             throw new InputValidationException();

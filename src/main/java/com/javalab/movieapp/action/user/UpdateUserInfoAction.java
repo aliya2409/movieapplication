@@ -27,7 +27,7 @@ public class UpdateUserInfoAction implements Action {
             User currentUser = (User) req.getSession().getAttribute(USER_ATTRIB);
             Long userId = Long.valueOf(validateLong(currentUser.getId().toString()));
             String newLogin = validateName(req.getParameter(LOGIN_PARAM));
-            LocalDate newBirthDate = LocalDate.parse(validateNullOrEmpty(req.getParameter(BIRTHDATE_PARAM)));
+            LocalDate newBirthDate = LocalDate.parse(validateDate(req.getParameter(BIRTHDATE_PARAM)));
             UserDAO userDAO = new UserDAO();
             userDAO.changeUserInfo(userId, newLogin, newBirthDate);
             currentUser.setLogin(newLogin);

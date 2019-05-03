@@ -117,7 +117,7 @@
                                             <input name="budget" class="form-control" id="budget" type="number"
                                                    required/>
                                             <label for="datepicker"><fmt:message key="releaseDate"/></label>
-                                            <input type="text" class="form-control" name="releaseDate" id="datepicker"
+                                            <input type="text" class="form-control" name="releaseDate" id="datepicker" pattern="([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))"
                                                    required/>
                                             <div class="custom-file mb-3">
                                                 <input type="file" class="custom-file-input"

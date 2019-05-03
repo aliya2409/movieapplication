@@ -31,7 +31,7 @@ public class AddUpdateUserAction implements Action {
             String password = validateNullOrEmpty(req.getParameter(PASSWORD_PARAM));
             Integer roleId = Integer.valueOf(validateInteger(req.getParameter(ROLE_ID_PARAM)));
             String mail = validateEmail(req.getParameter(EMAIL_PARAM));
-            LocalDate birthDate = LocalDate.parse(validateNullOrEmpty(req.getParameter(BIRTHDATE_PARAM)));
+            LocalDate birthDate = LocalDate.parse(validateDate(req.getParameter(BIRTHDATE_PARAM)));
             User user = new User();
             user.setLogin(login);
             user.setPassword(PasswordEncryptor.getPasswordEncrypted(password));

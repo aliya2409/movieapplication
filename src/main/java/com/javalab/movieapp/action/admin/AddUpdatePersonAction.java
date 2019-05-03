@@ -29,7 +29,7 @@ public class AddUpdatePersonAction implements Action {
         try {
             String originalName = validateName(req.getParameter(ORIGINAL_NAME_PARAM));
             String originalSurname = validateName(req.getParameter(ORIGINAL_SURNAME_PARAM));
-            LocalDate birthDate = LocalDate.parse(validateNullOrEmpty(req.getParameter(BIRTHDATE_PARAM)));
+            LocalDate birthDate = LocalDate.parse(validateDate(req.getParameter(BIRTHDATE_PARAM)));
             Part filePart = req.getPart(IMAGE_PARAM);
             InputStream image = filePart.getInputStream();
             Person person = new Person();
