@@ -127,7 +127,7 @@
                                 <label for="datepicker"><fmt:message key="birthDate"/></label>
                             </td>
                             <td>
-                                <input type="text" class="form-control" name="birthD" id="datepicker" pattern="([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))" required/>
+                                <input type="text" class="form-control" name="birthD" id="datepicker" pattern="([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))" required/> <fmt:message key="inputDateFormat"/>
                             </td>
                         </tr>
                     </table>

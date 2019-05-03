@@ -93,7 +93,9 @@
                                         <a><fmt:message key="birthDate"/></a>
                                     </td>
                                     <td>
-                                        <input type="text" name="birthD" class="datepicker form-control" pattern="([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))" required>
+                                        <input type="text" name="birthD" class="datepicker form-control"
+                                               pattern="([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))" required>
+                                        <fmt:message key="inputDateFormat"/>
                                     </td>
                                 </tr>
                             </table>
@@ -164,7 +166,8 @@
                         </c:choose>
                     </c:if></p>
                     <p class="card-text"><strong><fmt:message key="birthDate"/>:</strong> ${person.formattedBirthDate} </p>
-                    <c:if test="${not empty sessionScope.user and user.roleId eq Constants.ADMIN_ROLE_ID and requestScope.origin eq Constants.LIST_PERSON_ACTION}">
+                    <c:if test="${not empty sessionScope.user and user.roleId eq Constants.ADMIN_ROLE_ID and
+                    requestScope.origin eq Constants.LIST_PERSON_ACTION}">
                         <a href="${movieServlet}/deletePerson?personId=${person.id}"
                            class="btn btn-danger" roleId="button"><fmt:message
                                 key="delete"/></a>
@@ -204,7 +207,9 @@
                                                 <a><fmt:message key="birthDate"/></a>
                                             </td>
                                             <td>
-                                                <input type="text" name="birthD" class="datepicker form-control" pattern="([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))" required>
+                                                <input type="text" name="birthD" class="datepicker form-control"
+                                                       pattern="([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))" required>
+                                                <fmt:message key="inputDateFormat"/>
                                             </td>
                                         </tr>
                                     </table>
@@ -222,7 +227,8 @@
                             </div>
                         </div>
                     </c:if>
-                    <c:if test="${not empty sessionScope.user and user.roleId eq Constants.ADMIN_ROLE_ID and requestScope.origin ne Constants.LIST_PERSON_ACTION}">
+                    <c:if test="${not empty sessionScope.user and user.roleId eq Constants.ADMIN_ROLE_ID and
+                    requestScope.origin ne Constants.LIST_PERSON_ACTION}">
                         <a href="${movieServlet}/deleteCrewMember?personId=${person.id}&movieId=${requestScope.movieId}"
                            class="btn btn-danger" roleId="button"><fmt:message
                                 key="delete"/></a>

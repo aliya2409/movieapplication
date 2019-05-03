@@ -92,7 +92,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="datepicker"><fmt:message key="birthDate"/></label>
-                                    <input type="text" name="birthD" id="datepicker" pattern="([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))" required>
+                                    <input type="text" name="birthD" id="datepicker"
+                                           pattern="([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))" required>
+                                    <fmt:message key="inputDateFormat"/>
                                 </div>
                                 <button type="submit" class="btn btn-primary"><fmt:message key="submit"/></button>
                             </form>
