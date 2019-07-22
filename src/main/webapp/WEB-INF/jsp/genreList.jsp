@@ -63,11 +63,6 @@
                     <tr>
                         <td>${genre.name}</td>
                         <td>
-                            <a href="${movieServlet}/deleteGenre?genreId=${genre.id}" class="btn btn-danger"
-                               roleId="button"><fmt:message
-                                    key="delete"/></a>
-                        </td>
-                        <td>
                             <p>
                                 <button class="btn btn-primary" type="button" data-toggle="collapse"
                                         data-target="#buttoncollapse${genre.id}"
@@ -116,6 +111,11 @@
                                     </form>
                                 </div>
                             </div>
+                        </td>
+                        <td>
+                            <a href="${movieServlet}/deleteGenre?genreId=${genre.id}" class="btn btn-danger"
+                               roleId="button"><fmt:message
+                                    key="delete"/></a>
                         </td>
                     </tr>
                 </c:forEach>

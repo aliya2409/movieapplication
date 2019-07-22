@@ -4,9 +4,11 @@ import com.javalab.movieapp.action.Action;
 import com.javalab.movieapp.action.ActionResult;
 import com.javalab.movieapp.dao.MovieDAO;
 import com.javalab.movieapp.entities.Movie;
+import com.javalab.movieapp.utils.validators.IncorrectImageTypeException;
 import com.javalab.movieapp.utils.validators.InputValidationException;
 import org.apache.log4j.Logger;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +20,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import static com.javalab.movieapp.Constants.*;
+import static com.javalab.movieapp.utils.validators.ImageValidator.validateImage;
 import static com.javalab.movieapp.utils.validators.InputValidator.*;
 
 public class AddUpdateMovieAction implements Action {
@@ -32,16 +35,14 @@ public class AddUpdateMovieAction implements Action {
             LocalTime duration = LocalTime.parse(validateNullOrEmpty(req.getParameter(DURATION_PARAM)));
             Long budget = Long.valueOf(validateLong(req.getParameter(BUDGET_PARAM)));
             LocalDate releaseDate = LocalDate.parse(validateDate(req.getParameter(RELEASE_DATE_PARAM)));
-            String description = validateNullOrEmpty(req.getParameter(DESCRIPTION_PARAM));
             Part filePart = req.getPart(IMAGE_PARAM);
-            InputStream image = filePart.getInputStream();
+            InputStream image =  validateImage(filePart.getInputStream());
             MovieDAO movieDAO = new MovieDAO();
             Movie movie = new Movie();
             movie.setOriginalTitle(originalTitle);
             movie.setDuration(duration);
             movie.setBudget(budget);
             movie.setReleaseDate(releaseDate);
-            movie.setDescription(description);
             movie.setImage(image);
             if (ADD_MOVIE_ACTION.equals(action)) {
                 movieDAO.create(movie);
@@ -56,6 +57,9 @@ public class AddUpdateMovieAction implements Action {
         } catch (SQLException e) {
             LOGGER.error(e);
             req.setAttribute(ERROR_ATTRIB, DATABASE_ERROR);
+        } catch (IncorrectImageTypeException e) {
+            LOGGER.error(e);
+            req.setAttribute(ERROR_ATTRIB, INCORRECT_IMAGE_TYPE_ERROR);
         }
         ActionResult actionResult = new ActionResult(LIST_MOVIE_ACTION, false);
         return actionResult;

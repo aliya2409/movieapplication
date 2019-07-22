@@ -91,6 +91,7 @@ public class Constants {
     public static final String INCORRECT_CRUCIAL_URL_PARAM_ERROR = "incorrectCrucialUrlParam";
     public static final String EMAIL_IS_ALREADY_TAKEN_ERROR = "emailIsTaken";
     public static final String LOCALE_DATA_EXISTS_ERROR = "localeDataExists";
+    public static final String INCORRECT_IMAGE_TYPE_ERROR= "incorrectImageType";
 
 
 
